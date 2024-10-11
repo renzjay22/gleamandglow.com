@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gleam & Glow Salon</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="logo.png" type="image/x-icon">
+</head>
+<body>
+    <div class="hero">
+        <video autoplay loop muted plays-inline class="back-video">
+            <source src="video.mp4" type="video/mp4">
+        </video>
+        <nav>
+            <img src="logo.png" class="logo">
+            <ul>
+                <li><a href="home.html" id="nav-home">HOME</a></li>
+                <li><a href="services.html" id="nav-services">SERVICES</a></li>
+                <li><a href="booking.html" id="nav-booking">BOOKING</a></li>
+                <li><a href="about.html" id="nav-about">ABOUT US</a></li>
+                <li><a href="contact.html" id="nav-contact">CONTACT US</a></li>
+                <li class="icon-container">
+                    <a href="index.html"><img src="logout.png" alt="Logout" class="logout-icon"></a>
+                    <div class="tooltip">Logout</div>
+                </li>
+               
+                <li class="profile-container" onclick="showModal()">
+                    <img id="user-profile-image" alt="Profile" class="profile-image" style="display: inline;">
+                    <span id="user-name" style="display: inline;"></span>
+                </li>
+                <!-- Language Selector -->
+                <li>
+                    <select id="language-selector" onchange="changeLanguage()">
+                        <option value="en">English</option>
+                        <option value="zh">Chinese</option>
+                        <option value="ko">Korean</option>
+                        <option value="ja">Japanese</option>
+                        <option value="ru">Russian</option>
+                        <option value="hi">Hindi</option>
+                    </select>
+                </li>
+                <li class="icon-container">
+                    <a href="order-status.html"><img src="icon/tracking.png" alt="order-status" class="order-status"></a>
+                    <div class="tooltip">Order Status</div>
+                </li>
+            </ul>
+        </nav>
+        <div class="content">
+            <h1 id="greeting">Hi There!</h1>
+            <h1 id="welcome">Welcome to</h1>
+            <h1 id="salon-name">Gleam & Glow</h1>
+            <h2 id="hours">Open 8:00 am - 7:00 pm</h2>
+            <a href="booking.html" id="book-now">Book Now</a>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Hello, <span id="modal-username">Admin</span>!</h2>
+            <p>Click below to go to the admin page:</p>
+            <button onclick="goToAdmin()">Go to Admin</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to change language
+        function changeLanguage() {
+            const lang = document.getElementById('language-selector').value;
+            const texts = {
+                en: {
+                    greeting: "Hi There!",
+                    welcome: "Welcome to",
+                    salonName: "Gleam & Glow",
+                    hours: "Open 8:00 am - 7:00 pm",
+                    bookNow: "Book Now",
+                    navHome: "HOME",
+                    navServices: "SERVICES",
+                    navBooking: "BOOKING",
+                    navAbout: "ABOUT US",
+                    navContact: "CONTACT US"
+                },
+                zh: {
+                    greeting: "你好!",
+                    welcome: "欢迎来到",
+                    salonName: "光辉与闪耀",
+                    hours: "营业时间 早上8:00 - 晚上7:00",
+                    bookNow: "现在预定",
+                    navHome: "首页",
+                    navServices: "服务",
+                    navBooking: "预订",
+                    navAbout: "关于我们",
+                    navContact: "联系我们"
+                },
+                ko: {
+                    greeting: "안녕하세요!",
+                    welcome: "환영합니다",
+                    salonName: "빛나는 및 빛",
+                    hours: "오전 8:00 - 오후 7:00",
+                    bookNow: "지금 예약",
+                    navHome: "홈",
+                    navServices: "서비스",
+                    navBooking: "예약",
+                    navAbout: "우리에 대하여",
+                    navContact: "문의하기"
+                },
+                ja: {
+                    greeting: "こんにちは!",
+                    welcome: "ようこそ",
+                    salonName: "グリーム＆グロー",
+                    hours: "営業時間 午前8時 - 午後7時",
+                    bookNow: "今すぐ予約",
+                    navHome: "ホーム",
+                    navServices: "サービス",
+                    navBooking: "予約",
+                    navAbout: "私たちについて",
+                    navContact: "お問い合わせ"
+                },
+                ru: {
+                    greeting: "Здравствуйте!",
+                    welcome: "Добро пожаловать в",
+                    salonName: "Сияние и Свет",
+                    hours: "Часы работы с 8:00 до 19:00",
+                    bookNow: "Записаться сейчас",
+                    navHome: "ГЛАВНАЯ",
+                    navServices: "УСЛУГИ",
+                    navBooking: "ЗАЯВКА",
+                    navAbout: "О НАС",
+                    navContact: "КОНТАКТЫ"
+                },
+                hi: {
+                    greeting: "नमस्ते!",
+                    welcome: "आपका स्वागत है",
+                    salonName: "ग्लिम एंड ग्लो",
+                    hours: "खुला 8:00 बजे - 7:00 बजे",
+                    bookNow: "अभी बुक करें",
+                    navHome: "घर",
+                    navServices: "सेवाएँ",
+                    navBooking: "बुकिंग",
+                    navAbout: "हमारे बारे में",
+                    navContact: "संपर्क करें"
+                }
+            };
+
+            const selectedTexts = texts[lang];
+            document.getElementById('greeting').textContent = selectedTexts.greeting;
+            document.getElementById('welcome').textContent = selectedTexts.welcome;
+            document.getElementById('salon-name').textContent = selectedTexts.salonName;
+            document.getElementById('hours').textContent = selectedTexts.hours;
+            document.getElementById('book-now').textContent = selectedTexts.bookNow;
+
+            // Update navigation links
+            document.getElementById('nav-home').textContent = selectedTexts.navHome;
+            document.getElementById('nav-services').textContent = selectedTexts.navServices;
+            document.getElementById('nav-booking').textContent = selectedTexts.navBooking;
+            document.getElementById('nav-about').textContent = selectedTexts.navAbout;
+            document.getElementById('nav-contact').textContent = selectedTexts.navContact;
+        }
+
+        // Retrieve current user from session storage
+        const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+        if (currentUser) {
+            // Display user profile image and name
+            const profileImage = document.getElementById('user-profile-image');
+            const userName = document.getElementById('user-name');
+
+            profileImage.src = currentUser.profileImage; // Set profile image
+            profileImage.style.display = 'inline'; // Show the image
+            userName.textContent = currentUser.name; // Set user name
+            userName.style.display = 'inline'; // Show the name
+        }
+        function showModal() {
+            // Show the modal
+            document.getElementById('myModal').style.display = "block";
+            // Set the username in the modal
+            document.getElementById('modal-username').textContent = document.getElementById('user-name').textContent;
+        }
+
+        function closeModal() {
+            // Hide the modal
+            document.getElementById('myModal').style.display = "none";
+        }
+
+        function goToAdmin() {
+            // Redirect to the admin page
+            window.location.href = 'admin.html';
+        }
+
+        // Close the modal when the user clicks anywhere outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('myModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>

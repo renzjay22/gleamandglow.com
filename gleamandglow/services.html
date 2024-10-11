@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <link rel="icon" href="logo.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fdf0ec;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image: url("design/design4.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            color: #ff5d8f;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        .services {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+        .service {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 200px;
+            cursor: pointer;
+        }
+        .service img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        .service h2 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .products {
+            display: none;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
+            justify-items: center;
+        }
+        .product {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 150px;
+        }
+        .product img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+        .product h3 {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .product p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .add-to-cart-btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #ff5d8f;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer; /* Changed from link to button */
+        }
+        .add-to-cart-btn:hover {
+            background-color: #ff769f;
+        }
+        /* Cart Icon */
+        .cart-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        .cart-count {
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 5px 10px;
+            margin-left: 5px;
+            font-size: 14px;
+        }
+        /* Button Styling */
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background-color: #ff5d8f;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .back-btn:hover {
+            background-color: #ff769f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Services</h1>
+        <div class="cart-icon" onclick="viewCart()">
+            <img src="shopping-cart.png" alt="Cart" style="width: 40px;">
+            <span class="cart-count" id="cartCount"></span>
+        </div>
+        <div class="services">
+            <!-- Manicure Service -->
+            <div class="service" onclick="window.location.href='booking.html'">
+                <img src="nails/nail3.JPG" alt="Manicure">
+                <h2>MANICURE</h2>
+            </div>
+
+            <!-- Nail Art Service -->
+            <div class="service" onclick="toggleProducts()">
+                <img src="design/design3.jpg" alt="Nail Art">
+                <h2>NAIL ART</h2>
+            </div>
+
+            <!-- Home Service -->
+            <div class="service" onclick="window.location.href='booking.html'">
+                <img src="nails/nail4.JPG" alt="Home Service">
+                <h2>HOME SERVICE</h2>
+            </div>
+        </div>
+
+        <!-- Products Section -->
+        <div class="products" id="products">
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product">
+                    <img src="nails/nail5.jpg" alt="Product 1">
+                    <h3>Blushing Elegance</h3>
+                    <p>Php 250.00</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Blushing Elegance', 'nails/nail5.jpg', '250.00')">Add to Cart</button>
+                    <a href="product-details.html?name=Blushing%20Elegance&price=250.00&image=nails/nail5.jpg" class="add-to-cart-btn">View Details</a>
+                </div>
+                <!-- Product 2 -->
+                <div class="product">
+                    <img src="nails/nail6.jpg" alt="Product 2">
+                    <h3>Floral Fantasy</h3>
+                    <p>Php 200.00</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Floral Fantasy', 'nails/nail6.jpg', '200.00')">Add to Cart</button>
+                    <a href="product-details.html?name=Floral%20Fantasy&price=200.00&image=nails/nail6.jpg" class="add-to-cart-btn">View Details</a>
+                </div>
+                <!-- Product 3 -->
+                <div class="product">
+                    <img src="nails/nail7.jpg" alt="Product 3">
+                    <h3>Golden Waves</h3>
+                    <p>Php 150.00</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Golden Waves', 'nails/nail7.jpg', '150.00')">Add to Cart</button>
+                    <a href="product-details.html?name=Golden%20Waves&price=150.00&image=nails/nail7.jpg" class="add-to-cart-btn">View Details</a>
+                </div>
+                <!-- Product 4 -->
+                <div class="product">
+                    <img src="nails/nail8.JPG" alt="Product 4">
+                    <h3>Tropical Paradise</h3>
+                    <p>Php 250.00</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Tropical Paradise', 'nails/nail8.JPG', '250.00')">Add to Cart</button>
+                    <a href="product-details.html?name=Tropical%20Paradise&price=250.00&image=nails/nail8.jpg" class="add-to-cart-btn">View Details</a>
+                </div>
+                <!-- Product 5 -->
+                <div class="product">
+                    <img src="nails/nail9.JPG" alt="Product 5">
+                    <h3>Ruby Petals</h3>
+                    <p>Php 200.00</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Ruby Petals', 'nails/nail9.JPG', '200.00')">Add to Cart</button>
+                    <a href="product-details.html?name=Ruby%20Petals&price=200.00&image=nails/nail9.jpg" class="add-to-cart-btn">View Details</a>
+                </div>
+                <!-- Product 6 -->
+                <div class="product">
+                    <img src="nails/nail10.JPG" alt="Product 6">
+                    <h3>Icy Serenity</h3>
+                    <p>Php 150.00</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Icy Serenity', 'nails/nail10.JPG', '150.00')">Add to Cart</button>
+                    <a href="product-details.html?name=Icy%20Serenity&price=150.00&image=nails/nail10.jpg" class="add-to-cart-btn">View Details</a>
+                </div>
+                <!-- Product 7 -->
+                <div class="product">
+                    <img src="nails/nail11.JPG" alt="Product 7">
+                    <h3>Lavender Bliss</h3>
+                    <p>Php 150.00</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Lavender Bliss', 'nails/nail11.JPG', '150.00')">Add to Cart</button>
+                    <a href="product-details.html?name=Lavender%20Bliss&price=150.00&image=nails/nail11.jpg" class="add-to-cart-btn">View Details</a>
+                </div>
+                <!-- Product 8 -->
+                <div class="product">
+                    <img src="nails/nail12.JPG" alt="Product 8">
+                    <h3>Cherry Blossom</h3>
+                    <p>Php 150.00</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Cherry Blossom', 'nails/nail12.JPG', '150.00')">Add to Cart</button>
+                    <a href="product-details.html?name=Cherry%20Blossom&price=150.00&image=nails/nail12.jpg" class="add-to-cart-btn">View Details</a>
+                </div>
+                <!-- Product 9 -->
+                <div class="product">
+                    <img src="nails/nail13.JPG" alt="Product 9">
+                    <h3>Frozen Glam</h3>
+                    <p>Php 250.00</p>
+                    <button class="add-to-cart-btn" onclick="addToCart('Frozen Glam', 'nails/nail13.JPG', '250.00')">Add to Cart</button>
+                    <a href="product-details.html?name=Frozen%20Glam&price=250.00&image=nails/nail13.jpg" class="add-to-cart-btn">View Details</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Homepage Button -->
+        <a href="homepage.html" class="back-btn">Back to Homepage</a>
+    </div>
+
+    <script>
+         // Add product to localStorage cart
+         function addToCart(name, image, price) {
+            const product = { name, image, price };
+
+            // Retrieve existing cart from localStorage
+            let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+
+            // Add product to cart
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Update cart count
+            updateCartCount();
+
+            // Alert the user
+            alert(`${name} has been added to your cart!`);
+        }
+
+        // Update the cart count on page load and after adding items
+        function updateCartCount() {
+            const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+            document.getElementById('cartCount').innerText = cart.length;
+        }
+
+        // View cart (redirect to the cart page)
+        function viewCart() {
+            window.location.href = 'shopping.html';
+        }
+
+        // Initialize cart count when the page loads
+        window.onload = updateCartCount;
+        // Toggle the visibility of products section
+        function toggleProducts() {
+            var productsSection = document.getElementById('products');
+            if (productsSection.style.display === 'none' || productsSection.style.display === '') {
+                productsSection.style.display = 'flex';
+            } else {
+                productsSection.style.display = 'none';
+            }
+        }
+
+        // Function to add product to cart
+        function addToCart(productName, productImage, productPrice) {
+                const product = {
+                    name: productName,
+                    image: productImage,
+                    price: productPrice
+                };
+
+                // Retrieve existing cart or create a new one
+                let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+                cart.push(product);
+
+                // Save the updated cart to localStorage
+                localStorage.setItem('cart', JSON.stringify(cart));
+
+                // Update cart count
+                let cartCount = cart.length;
+                document.getElementById('cartCount').innerText = cartCount;
+
+                alert(`${productName} has been added to your cart!`);
+            }
+
+            // Initialize cart count on page load
+            window.onload = function() {
+                const cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+                document.getElementById('cartCount').innerText = cart.length;
+            };
+
+            // View cart function (redirect to cart page)
+            function viewCart() {
+                window.location.href = 'shopping.html';
+            }
+    </script>
+</body>
+</html>

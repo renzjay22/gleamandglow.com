@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nail Designs</title>
+    <link rel="icon" href="logo.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-image: url('home.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: cover;
+        }
+        .container {
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            color: #FF66A3;
+            font-size: 36px;
+            margin-left: 20px;
+        }
+        .logo {
+            max-width: 100px;
+        }
+        .logo img {
+            width: 100%;
+            height: auto;
+        }
+
+        h1 {
+            color: #FF66A3;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        /* Design card styling */
+        .design-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .design-card {
+            background-color: #FFF;
+            border-radius: 10px;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid #FF66A3;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+        .design-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .design-card.enlarge img {
+            transform: scale(2); 
+            transition: transform 0.5s ease;
+        }
+        .description {
+            color: #999;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        /* Back button styling */
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #FFF;
+            background-color: #FF66A3;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+        .back-button:hover {
+            background-color: #FF3383;
+            transform: scale(1.1);
+        }
+
+        /* Intro Card Styling */
+        .intro-card {
+            background-color: #FFEDDF; /* Light background for intro */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid #FF66A3;
+            margin-bottom: 20px; /* Space below the intro card */
+        }
+        .intro-card p {
+            color: #333;
+            font-size: 18px;
+            margin: 0; /* Remove margin from paragraph */
+        }
+
+       /* Centering Cards Section */
+.centered-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    justify-content: center;
+}
+
+.card {
+    background-color: #fff; /* Background color for the card */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    
+}
+
+.card-image {
+    max-width: 100%; /* Make sure images are responsive */
+    height: auto;
+    margin-bottom: 15px; /* Space between image and text */
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+         <!-- Header with logo and title -->
+        <div class="header">
+            <div class="logo">
+                <img src="logo.png" alt="Company Logo">
+            </div>
+            <h1>Our Best Designs!</h1>
+        </div>
+
+        <div class="design-grid">
+            <div class="design-card" onclick="animateCard(this)">
+                <img src="nails/nail1.JPG" alt="Nail Design 1">
+                <p class="description">A set of long, pointed nails with a soft pink base and delicate floral designs in white and silver.</p>
+            </div>
+            <div class="design-card" onclick="animateCard(this)">
+                <img src="design/design1.jpg" alt="Nail Design 2">
+                <p class="description">It features almond-shaped nails with a gradient transition from light pink to a darker shade, adorned with cherry blossom flower designs.</p>
+            </div>
+            <div class="design-card" onclick="animateCard(this)">
+                <img src="nails/nail2.jpg" alt="Nail Design 3">
+                <p class="description">This oval-shaped nails with a transparent base and a subtle pink hue, embellished with delicate floral patterns and a touch of glitter.</p>
+            </div>
+            <div class="design-card" onclick="animateCard(this)">
+                <img src="design/design2.jpg" alt="Nail Design 4">
+                <p class="description">Presents a set of long, pointed nails with a deep green base and intricate flower designs in various shades of green, creating a natural and earthy look.</p>
+            </div>
+        </div>
+        &nbsp;
+        <!-- Intro Card Section -->
+        <div class="intro-card">
+            <p>If a customer's nail extension gets damaged or breaks within 3 days of receiving the fake nails or nail session, here are some health precautions and possible alternatives or solutions to offer:</p> 
+        </div>
+
+        <!-- Centered Cards Section -->
+        <div class="centered-cards">
+            <!-- New Design Cards for Nail Repair, Replacement, and Temporary Fix -->
+            <div class="design-card" onclick="animateCard(this)">
+                <img src="repair/images1.JPG" alt="Nail Repair">
+                <p class="description"><strong>Nail Repair:</strong> If the break is minor, we offer to repair the nail extension using a nail adhesive or gel polish.</p>
+            </div>
+            <div class="design-card" onclick="animateCard(this)">
+                <img src="repair/images2.JPG" alt="Nail Replacement">
+                <p class="description"><strong>Replacement:</strong> If the nail extension is significantly damaged, we offer to replace the broken extension with a new one.</p>
+            </div>
+            <div class="design-card" onclick="animateCard(this)">
+                <img src="repair/images3.JPG" alt="Temporary Fix">
+                <p class="description"><strong>Temporary Fix:</strong> If you do not want a replacement immediately, we can file down the broken extension to smoothen it and apply a clear coat for protection until you're ready for a new one.</p>
+            </div>
+        </div>
+        &nbsp;
+         <!-- Intro Card Section -->
+<div class="intro-card">
+    <p>To keep nail extensions healthy and long-lasting, customers should follow these key health precautions:</p> 
+</div>
+
+<!-- Centered Cards Section -->
+<div class="centered-cards">
+    <!-- New Design Cards for Nail Repair, Replacement, and Temporary Fix -->
+    <div class="design-card" onclick="animateCard(this)">
+        <p class="description"><strong>Be Gentle -</strong> If the break is minor, we can repair the nail extension using nail adhesive or gel polish.</p>
+    </div>
+    <div class="design-card" onclick="animateCard(this)">
+        <p class="description"><strong>Moisturize -</strong> Use cuticle oil or moisturizing cream to keep the skin around your nails hydrated and healthy.</p>
+    </div>
+    <div class="design-card" onclick="animateCard(this)">
+        <p class="description"><strong>Keep them Clean -</strong> To avoid bacteria accumulation, wash your nail extensions regularly.</p>
+    </div>
+    <div class="design-card" onclick="animateCard(this)">
+        <p class="description"><strong>Avoid Harsh Chemicals -</strong> Steer clear of harsh chemicals, such as bleach or acetone-based solutions, which can damage and lift your nail extensions.</p>
+    </div>
+    <div class="design-card" onclick="animateCard(this)">
+        <p class="description"><strong>Schedule Regular Maintenance -</strong> Keeping your nail extensions in good condition requires regular maintenance.</p>
+    </div>
+</div>
+
+
+        <!-- Back button -->
+        <a href="homepage.html" class="back-button">Back to Homepage</a>
+    </div>
+
+    <script>
+        // Function to change language based on sessionStorage
+        function applyLanguage() {
+            const lang = sessionStorage.getItem('selectedLanguage'); // Get the language from session storage
+            const texts = {
+                en: {
+                    designsTitle: "Our Best Designs!",
+                    design1Description: "A set of long, pointed nails with a soft pink base and delicate floral designs in white and silver.",
+                    design2Description: "It features almond-shaped nails with a gradient transition from light pink to a darker shade, adorned with cherry blossom flower designs.",
+                    design3Description: "Classic red nails with a glossy finish, perfect for any occasion."
+                },
+                zh: {
+                    designsTitle: "我们最好的设计！",
+                    design1Description: "一套长尖指甲，底色为柔和的粉色，上面有精致的白色和银色花朵设计。",
+                    design2Description: "它的指甲呈杏仁形，颜色渐变从浅粉色过渡到深色，装饰有樱花花卉设计。",
+                    design3Description: "经典红色指甲，光泽感十足，适合任何场合。"
+                },
+                ko: {
+                    designsTitle: "우리의 최고의 디자인!",
+                    design1Description: "부드러운 핑크색 바탕에 섬세한 흰색과 은색 꽃 디자인이 있는 긴 뾰족한 손톱 세트.",
+                    design2Description: "그라데이션으로 변하는 아몬드 모양의 손톱, 연한 핑크색에서 더 어두운 색으로 장식된 벚꽃 꽃 디자인.",
+                    design3Description: "어떤 경우에도 완벽한 고전적인 빨간 손톱."
+                },
+                ja: {
+                    designsTitle: "私たちのベストデザイン！",
+                    design1Description: "柔らかいピンクのベースと繊細な白と銀の花のデザインが施された長くとがった爪のセット。",
+                    design2Description: "アーモンド形の爪は、淡いピンクから濃い色へのグラデーションに移行し、桜の花のデザインで飾られています。",
+                    design3Description: "どんな場面にもぴったりのクラシックな赤い爪。"
+                },
+                ru: {
+                    designsTitle: "Наши лучшие дизайны!",
+                    design1Description: "Набор длинных острых ногтей с нежно-розовой основой и деликатными цветочными дизайнами в белом и серебряном цветах.",
+                    design2Description: "Аминдальные ногти с градиентным переходом от светло-розового к темному, украшенные дизайном цветков вишни.",
+                    design3Description: "Классические красные ногти с блестящей отделкой, идеально подходящие для любого случая."
+                },
+                hi: {
+                    designsTitle: "हमारे बेहतरीन डिज़ाइन!",
+                    design1Description: "एक सेट लंबे, नुकीले नाखूनों का जिसमें हलके गुलाबी रंग का बेस और सफेद और चांदी के नाजुक फूलों के डिज़ाइन हैं।",
+                    design2Description: "यह बादाम के आकार के नाखूनों के साथ हलके गुलाबी से गहरे रंग में ग्रेडिएंट संक्रमण को दिखाता है, जो चेरी ब्लॉसम फूलों के डिज़ाइन से सजे हैं।",
+                    design3Description: "किसी भी अवसर के लिए एक क्लासिक लाल नाखून।"
+                }
+            };
+    
+            const selectedTexts = texts[lang];
+            document.getElementById('designs-title').textContent = selectedTexts.designsTitle;
+            document.getElementById('design1-description').textContent = selectedTexts.design1Description;
+            document.getElementById('design2-description').textContent = selectedTexts.design2Description;
+            document.getElementById('design3-description').textContent = selectedTexts.design3Description;
+        }
+    
+        // Load language on page load with random selection
+        function loadLanguage() {
+            const languages = ['en', 'zh', 'ko', 'ja', 'ru', 'hi'];
+            const randomLang = languages[Math.floor(Math.random() * languages.length)]; // Randomly select a language
+            sessionStorage.setItem('selectedLanguage', randomLang); // Save the random language
+            applyLanguage(); // Apply the language texts
+        }
+    
+        // Call loadLanguage when the page loads
+        window.onload = loadLanguage;
+    
+        // Animation for card clicking (optional)
+        function animateCard(card) {
+            // Add your animation logic here
+            card.classList.toggle('active');
+        }
+    </script>
+    
+
+</body>
+</html>

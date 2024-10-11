@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Booking</title>
+    <link rel="icon" href="logo.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #FCE5DC;
+            background-image: url("design/design5.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        h2 {
+            text-align: center;
+            color: #f06292;
+            font-size: 50px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select, textarea {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .small-input {
+            width: 27%; 
+        }
+        .button {
+            background-color: #f06292;
+            color: white;
+            padding: 10px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 50%;
+            font-size: 18px;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+        .button:hover {
+            background-color: #e91e63;
+            transform: scale(1.1);
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: #FFF;
+            background-color: #FF66A3;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+        }
+        .back-button:hover {
+            background-color: #FF3383;
+            transform: scale(1.1);
+        }
+
+        .logo {
+            max-width: 100px;
+        }
+        .logo img {
+            width: 100%;
+            height: auto;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.4.1/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("-BlgE0Z9FZjMt-QuF");
+        })();
+        
+        function sendEmail(event) {
+            event.preventDefault(); // Prevent default form submission
+            emailjs.sendForm("service_cy3oaam","template_ueu96xp", event.target)
+                .then(function() {
+                    alert('Booking request sent successfully!');
+                    window.location.href = "homepage.html"; // Redirect after success
+                }, function(error) {
+                    alert('Failed to send booking request. Please try again later.');
+                    console.log(error);
+                });
+        }
+        
+        function updateMapLink() {
+            var address = document.getElementById("address").value;
+            var mapLink = document.getElementById("map-link");
+
+            if (address.trim() !== "") {
+                // Create a URL for Google Maps with the entered address
+                var googleMapsUrl = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(address);
+                mapLink.href = googleMapsUrl;
+                mapLink.style.display = "inline-block"; // Show the link once an address is entered
+            } else {
+                mapLink.style.display = "none"; // Hide the link if no address is entered
+            }
+        }
+
+        function updatePrice() {
+            var serviceSelect = document.getElementById("service");
+            var priceInput = document.getElementById("price");
+
+            // Get the price from the selected option
+            var selectedOption = serviceSelect.options[serviceSelect.selectedIndex].text;
+            var price = selectedOption.match(/\$(\d+)/); // Extract price using regex
+            priceInput.value = price ? price[0].replace('$', '') : '0'; // Set the price input value
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="logo.png" alt="Company Logo">
+        </div>
+        <h2>Service Booking Form</h2>
+        
+        <form onsubmit="sendEmail(event)">
+            <label for="service">Choose a Service:</label>
+            <select name="service" id="service" required class="small-input" onchange="updatePrice()">
+                <option value="Manicure">Manicure - Php 200.00</option>
+                <option value="Cleaning">Cleaning - Php 250.00</option>
+                <option value="French Manicure">French Manicure - Php 150.00</option>
+                <option value="Gel Manicure">Gel Manicure - Php 300.00</option>
+                <option value="Spa Manicure">Spa Manicure - Php 400.00</option>
+            </select>
+
+            <!-- Hidden input for booking price -->
+            <input type="hidden" id="price" name="price" value="">
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="contact">Contact No.:</label>
+            <input type="text" id="contact" name="contact" required>
+
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" required oninput="updateMapLink()"></textarea>
+
+            <!-- Link to Google Maps -->
+            <a id="map-link" href="#" target="_blank" style="display:none;" class="button">Get Directions</a>
+
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" min="0" max="120" required class="small-input">
+
+            <label for="sex">Sex:</label>
+            <select name="sex" id="sex" required class="small-input">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+            
+            <label for="date_time">Date and Time:</label>
+            <input type="datetime-local" id="date_time" name="date_time" required>
+
+            <label for="payment_method">Payment Method:</label>
+            <select name="payment_method" id="payment_method" required>
+                <option value="COD">Cash on Delivery</option>
+                <option value="E-Wallet">E-Wallet</option>
+            </select>
+
+            <button type="submit" class="button">Book Now</button>
+        </form>
+        <a href="services.html" class="back-button">Back to Services</a>
+        <a href="homepage.html" class="back-button">Back to Homepage</a>
+    </div>
+</body>
+</html>

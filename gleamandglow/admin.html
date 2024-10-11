@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Delivery Control</title>
+    <link rel="icon" href="logo.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .admin-container {
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        input, select {
+            padding: 10px;
+            width: 80%;
+            max-width: 400px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .order-status, .parcel-location {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+        }
+
+        .order-status div, .parcel-location div {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+
+        .order-table {
+            margin-top: 30px;
+            width: 100%;
+            max-width: 800px;
+            border-collapse: collapse;
+        }
+
+        .order-table th, .order-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .order-table th {
+            background-color: #3498db;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Admin: Manage Delivery Status & Parcel Location</h1>
+
+        <!-- Form to update delivery status -->
+        <form id="deliveryForm">
+            <label for="orderId">Order ID:</label>
+            <input type="text" id="orderId" name="orderId" placeholder="Enter Order ID" required>
+
+            <label for="trackingNumber">Tracking Number:</label>
+            <input type="text" id="trackingNumber" name="trackingNumber" placeholder="Enter Tracking Number" required>
+
+            <label for="status">Update Status:</label>
+            <select id="status" name="status" required>
+                <option value="Preparing">Preparing</option>
+                <option value="In Transit">In Transit</option>
+                <option value="Out for Delivery">Out for Delivery</option>
+                <option value="Delivered">Delivered</option>
+            </select>
+
+            <label for="boundArea">Bound Area (Location):</label>
+            <input type="text" id="boundArea" name="boundArea" placeholder="Enter current location" required>
+
+            <button type="button" onclick="updateDeliveryStatus()">Update Status</button>
+        </form>
+
+        <!-- Section to display all orders like Excel -->
+        <table class="order-table" id="orderTable">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Tracking Number</th>
+                    <th>Status</th>
+                    <th>Bound Area</th>
+                </tr>
+            </thead>
+            <tbody id="orderTableBody">
+                <!-- Orders will be dynamically added here -->
+            </tbody>
+        </table>
+
+        <!-- Messages for success or error -->
+        <div id="message" class="success"></div>
+    </div>
+
+    <script>
+        // Simulated order list (you can fetch this from an API or database in real implementation)
+        let orderList = [];
+
+
+// Function to update delivery status and add it to the table
+function updateDeliveryStatus() {
+    // Get form data
+    const orderId = document.getElementById('orderId').value;
+    const trackingNumber = document.getElementById('trackingNumber').value;
+    const status = document.getElementById('status').value;
+    const boundArea = document.getElementById('boundArea').value;
+
+    // Validate input fields
+    if (!orderId || !trackingNumber || !status || !boundArea) {
+        displayMessage("Please fill in all fields", "error");
+        return;
+    }
+
+    // Create a new order object
+    const newOrder = {
+        orderId: orderId,
+        trackingNumber: trackingNumber,
+        status: status,
+        boundArea: boundArea
+    };
+
+    // Add new order to the order list
+    orderList.push(newOrder);
+
+    // Save to sessionStorage
+    sessionStorage.setItem('currentOrder', orderId);
+    sessionStorage.setItem('trackingNumber', trackingNumber);
+    sessionStorage.setItem('boundArea', boundArea);
+
+    // Update the table with the new order
+    addOrderToTable(newOrder);
+
+    // Display success message
+    displayMessage("Status and location updated successfully!", "success");
+}
+        // Function to update delivery status and add it to the table
+        function updateDeliveryStatus() {
+            // Get form data
+            const orderId = document.getElementById('orderId').value;
+            const trackingNumber = document.getElementById('trackingNumber').value;
+            const status = document.getElementById('status').value;
+            const boundArea = document.getElementById('boundArea').value;
+
+            // Validate input fields
+            if (!orderId || !trackingNumber || !status || !boundArea) {
+                displayMessage("Please fill in all fields", "error");
+                return;
+            }
+
+            // Create a new order object
+            const newOrder = {
+                orderId: orderId,
+                trackingNumber: trackingNumber,
+                status: status,
+                boundArea: boundArea
+            };
+
+            // Add new order to the order list
+            orderList.push(newOrder);
+
+            // Update the table with the new order
+            addOrderToTable(newOrder);
+
+            // Display success message
+            displayMessage("Status and location updated successfully!", "success");
+
+            // Optionally, send this data to a backend or API for storage
+            /*
+            fetch('/api/update-status', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newOrder)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    displayMessage("Status and location updated successfully!", "success");
+                } else {
+                    displayMessage("Error updating status and location", "error");
+                }
+            })
+            .catch(error => {
+                console.error('Error updating status and location:', error);
+                displayMessage("Error updating status and location", "error");
+            });
+            */
+        }
+
+        // Function to add a new order to the table
+        function addOrderToTable(order) {
+            const tableBody = document.getElementById('orderTableBody');
+            const row = document.createElement('tr');
+
+            row.innerHTML = `
+                <td>${order.orderId}</td>
+                <td>${order.trackingNumber}</td>
+                <td>${order.status}</td>
+                <td>${order.boundArea}</td>
+            `;
+
+            tableBody.appendChild(row);
+        }
+
+        // Function to display success or error messages
+        function displayMessage(message, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = message;
+            if (type === "success") {
+                messageDiv.classList.remove("error");
+                messageDiv.classList.add("success");
+            } else {
+                messageDiv.classList.remove("success");
+                messageDiv.classList.add("error");
+            }
+        }
+    </script>
+</body>
+</html>

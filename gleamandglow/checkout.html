@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="icon" href="logo.png" type="image/x-icon">
+    <script type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "-BlgE0Z9FZjMt-QuF",
+      });
+   })();
+</script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fdf0ec;
+            padding: 20px;
+            margin: 0;
+            background-image: url("design/design8.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        h1 {
+            color: #ff5d8f;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="email"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        .form-group textarea {
+            resize: vertical;
+            height: 80px;
+        }
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+        .cart-item img {
+            max-width: 80px;
+            margin-right: 15px;
+        }
+        .summary {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #ff5d8f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .btn-submit:hover {
+            background-color: #ff769f;
+        }
+        .back-button {
+            margin-top: 40px;
+        }
+        .back-button a {
+            text-decoration: none;
+            padding: 10px 20px;
+            background-color: #FF4081;
+            color: white;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .back-button a:hover {
+            background-color: #ff739a;
+        }
+        .delivery-info {
+            margin-top: 15px;
+            font-style: italic;
+            color: #333;
+        }
+        .payment-option {
+        margin-bottom: 10px;
+    }
+    .btn-link {
+        display: inline-block;
+        margin-left: 10px;
+        padding: 5px 10px;
+        background-color: #4CAF50;
+        color: white;
+        border-radius: 4px;
+        text-decoration: none;
+    }
+    .btn-link:hover {
+        background-color: #45a049;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Order Checkout</h1>
+        <form id="orderForm">
+            
+            <!-- Cart Items -->
+            <div id="cartItems"></div>
+
+            <!-- Shipping Address -->
+            <div class="form-group">
+                <label for="address">Shipping Address</label>
+                <textarea id="address" name="address" placeholder="Enter your shipping address" required></textarea>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+            </div>
+
+            <!-- Shipping Method -->
+            <div class="form-group">
+                <label for="shipping">Shipping Method</label>
+                <select id="shipping" required>
+                    <option value="standard">Standard Shipping - Php 40.00</option>
+                    <option value="express">Express Shipping - Php 80.00</option>
+                </select>
+                <div class="delivery-info" id="deliveryTime">Estimated delivery time: 5-7 business days (Standard) or 2-3 business days (Express).</div>
+            </div>
+
+            <div class="form-group">
+                <label for="paymentMethod">Payment Method</label>
+                <div class="payment-option">
+                    <label for="cashondelivery">
+                        <input type="radio" id="gcash" name="paymentMethod" value="cashondelivery" required>
+                        Cash on Delivery
+                    </label>
+                </div>
+
+                <div class="payment-option">
+                    <label for="gcash">
+                        <input type="radio" id="gcash" name="paymentMethod" value="GCash" required>
+                        GCash
+                    </label>
+                </div>
+                <div class="payment-option">
+                    <label for="maya">
+                        <input type="radio" id="maya" name="paymentMethod" value="Maya">
+                        Maya
+                    </label>
+                </div>
+                <div class="payment-option">
+                    <label for="bank">
+                        <input type="radio" id="bank" name="paymentMethod" value="Bank">
+                        Bank Account
+                    </label>
+                    <select id="bankSelect" name="bankSelect" required>
+                        <option value="">Select Bank</option>
+                        <option value="BDO">BDO</option>
+                        <option value="Metrobank">Metrobank</option>
+                        <option value="Chinabank">Chinabank</option>
+                        <option value="EastWest">EastWest Bank</option>
+                        <option value="UnionBank">UnionBank</option>
+                        <option value="SecurityBank">Security Bank</option>
+                    </select>
+                    <a id="bankLink" href="#" target="_blank" class="btn-link" style="display:none;">Open Bank</a>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="summary">
+                <h3>Order Summary</h3>
+                <div id="productSummary"></div>
+                <div class="summary-item">
+                    <span>Shipping:</span>
+                    <span id="summaryShipping">Php 40.00</span>
+                </div>
+                <div class="summary-item">
+                    <span><strong>Total:</strong></span>
+                    <span id="summaryTotal"><strong>Php 0.00</strong></span>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-submit">Place Order</button>
+        </form>
+        <div class="back-button">
+            <a href="shopping.html">Back to Cart</a>
+        </div>
+    </div>
+
+    <script>
+        // Get cart items and quantities from localStorage
+        const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        const cartItemsContainer = document.getElementById('cartItems');
+        const productSummary = document.getElementById('productSummary');
+        let totalPrice = 0;
+
+        const emailInput = document.getElementById('email');
+        const storedUser = JSON.parse(sessionStorage.getItem('currentUser')); 
+
+        // Pre-fill the email field if the user is logged in
+        if (storedUser) {
+            emailInput.value = storedUser.email; // Set the email to the logged-in user's email
+        }
+        
+        cartItems.forEach((item, index) => {
+            // Retrieve stored quantity for each item (or default to 1)
+            const quantity = parseInt(localStorage.getItem(`quantity-${index}`)) || 1;
+
+            // Add cart item to checkout page (only name and quantity)
+            const cartItemDiv = document.createElement('div');
+            cartItemDiv.classList.add('cart-item');
+            cartItemDiv.innerHTML = `
+                <div>
+                    <img src="${item.image}" alt="${item.name}">
+                    <span>${item.name}</span>
+                </div>
+                <div>
+                    <span>Php ${item.price} x ${quantity}</span>
+                </div>
+            `;
+            cartItemsContainer.appendChild(cartItemDiv);
+
+            // Add product to the summary section (only name and quantity)
+            const summaryItem = document.createElement('div');
+            summaryItem.classList.add('summary-item');
+            const itemTotal = (item.price * quantity).toFixed(2); // Calculate total for the item
+            summaryItem.innerHTML = `
+                <span>${item.name} (x${quantity}):</span>
+                <span>Php ${itemTotal}</span>
+            `;
+            productSummary.appendChild(summaryItem);
+
+            // Calculate total price based on quantity
+            totalPrice += parseFloat(itemTotal); // Add item total to the overall total
+        });
+
+        // Update total price with shipping
+        function updateTotal() {
+            const shippingCost = parseFloat(document.getElementById('shipping').value === 'express' ? 80 : 40);
+            const finalTotal = totalPrice + shippingCost;
+            document.getElementById('summaryTotal').textContent = `Php ${finalTotal.toFixed(2)}`;
+        }
+
+        // Set initial total
+        const initialShipping = 40; // Standard shipping by default
+        const summaryTotal = document.getElementById('summaryTotal');
+        const summaryShipping = document.getElementById('summaryShipping');
+        summaryTotal.textContent = `Php ${(totalPrice + initialShipping).toFixed(2)}`;
+
+        // Update total when shipping changes
+        const shippingSelect = document.getElementById('shipping');
+        shippingSelect.addEventListener('change', function () {
+            const shippingCost = this.value === 'express' ? 80 : 40;
+            summaryShipping.textContent = `Php ${shippingCost.toFixed(2)}`;
+            updateTotal(); // Recalculate total with updated shipping
+        });
+
+        // Handle form submission
+        document.getElementById('orderForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Gather order details
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+            const shippingMethod = document.getElementById('shipping').value;
+
+             // Generate unique tracking number
+            const trackingNumber = generateTrackingNumber();
+            // Prepare email data
+            const templateParams = {
+                to_email: email, // recipient's email
+                from_name: "Gleam and Glow", // your store name
+                message: `
+                    Order Summary:
+                    ${productSummary.innerHTML}
+                    Shipping Method: ${shippingMethod}
+                    Shipping Address: ${address}
+                    Tracking Number: ${trackingNumber}
+                `,
+            };
+
+            emailjs.send("service_uiwqwsr", "template_gdyocon", templateParams)
+        .then(function (response) {
+            console.log("Email sent successfully!", response.status, response.text);
+            localStorage.removeItem('cart'); // Clear cart after order
+            sessionStorage.removeItem('currentUser'); // Clear user session data
+            
+            /// Set the order ID and tracking number in session storage and redirect to status page
+            const orderId = 'GNG' + Math.floor(Math.random() * 1000000);  // Generate unique order ID
+            sessionStorage.setItem('currentOrder', orderId);
+            sessionStorage.setItem('trackingNumber', trackingNumber);
+
+            window.location.href = 'order-status.html'; // Redirect to order status page
+        }, function (error) {
+            console.error("Failed to send email. Error:", error);
+            alert('Failed to place order. Please try again.');
+        });
+        // Generate tracking number
+    function generateTrackingNumber() {
+    const prefix = 'GNG';  // Example prefix for branding
+    const randomPart = Math.random().toString(36).substring(2, 10).toUpperCase();  // Random alphanumeric
+    const timestampPart = Date.now().toString().slice(-6);  // Last 6 digits of timestamp for uniqueness
+    return `${prefix}-${randomPart}-${timestampPart}`;
+}
+        });
+          // JavaScript to handle bank website links dynamically
+            const bankSelect = document.getElementById('bankSelect');
+            const bankLink = document.getElementById('bankLink');
+
+        const bankLinks = {
+        "BDO": "https://www.bdo.com.ph/",
+        "Metrobank": "https://personal.metrobank.com.ph/",
+        "Chinabank": "https://www.chinabank.ph/",
+        "EastWest": "https://www.eastwestbanker.com/",
+        "UnionBank": "https://www.unionbankph.com/",
+        "SecurityBank": "https://www.securitybank.com/"
+    };
+
+    bankSelect.addEventListener('change', function() {
+        const selectedBank = this.value;
+        if (selectedBank && bankLinks[selectedBank]) {
+            bankLink.href = bankLinks[selectedBank];
+            bankLink.style.display = 'inline-block'; // Show the link
+        } else {
+            bankLink.style.display = 'none'; // Hide the link if no bank selected
+        }
+    });
+    </script>
+</body>
+</html>

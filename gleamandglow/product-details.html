@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="icon" href="logo.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fdf0ec;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            text-align: center;
+        }
+        .product-details {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: 20px;
+        }
+        .product-details img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .product-details h3 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .product-details p {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 10px;
+        }
+        .add-to-cart-btn {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #ff5d8f;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .add-to-cart-btn:hover {
+            background-color: #ff769f;
+        }
+        .back-to-services {
+            display: inline-block;
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #ff5d8f;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .back-to-services:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="product-details">
+            <img id="productImage" alt="Product Image">
+            <h3 id="productName">Product Name</h3>
+            <p id="productPrice">Product Price</p>
+            <button class="add-to-cart-btn" id="addToCartBtn">Add to Cart</button>
+
+        </div>
+        <a href="services.html" class="back-to-services">← Back to Services</a>
+    </div>
+
+    <script>
+        // Get query parameters from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productName = urlParams.get('name');
+        const productPrice = urlParams.get('price');
+        const productImage = urlParams.get('image');
+
+        // Set product details dynamically
+        document.getElementById('productName').textContent = productName;
+        document.getElementById('productPrice').textContent = `Php ${productPrice}`;
+        document.getElementById('productImage').src = productImage;
+
+        // Add to cart functionality
+        document.getElementById('addToCartBtn').addEventListener('click', () => {
+            const product = { name: productName, image: productImage, price: productPrice };
+            let cart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : [];
+            cart.push(product);
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            alert(`${productName} has been added to your cart!`);
+        });
+    </script>
+</body>
+</html>
